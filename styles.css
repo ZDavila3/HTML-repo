@@ -1,157 +1,201 @@
+/* Reset & layout */
 body {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    background: #121212;
-    font-family: 'Segoe UI', sans-serif;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
-/* overall button container that we created using the DIV class in the index file */ 
-  .button-container {
-    position: relative;
-    width: 100vw;
-    height: 60vh;
-  }
-  /* all buttons (pre-hidden)*/
-  .magic-btn {
-    position: absolute;
-    padding: 12px 24px;
-    background: #ff5f57;
-    color: white;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: all 0.4s ease;
-    box-shadow: 0 5px 15px rgba(255, 95, 87, 0.4);
-  }
-  /* when button is hovered over*/
-  .magic-btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 8px 25px rgba(255, 95, 87, 0.6);
-  }
-  /* when button is not hovered over*/
-  .hidden {
-    display: none;
-  }
-  /* button position on the screen*/
-  #btn1 {
-    top: 20%;
-    left: 30%;
-  }
-  
-  #btn2 {
-    top: 60%;
-    right: 30%;
-  }
-  
-  #btn3 {
-    bottom: 10%;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  /* actual portfolio or "about me" section */
-  .portfolio {
-    margin-top: 40px;
-    text-align: center;
-    max-width: 600px;
-    padding: 20px;
-    background: #1f1f1f;
-    border-radius: 12px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
-    animation: fadeIn 1s ease forwards;
-  }
-  /*specific changes to the hs and p in the portfolio section */
-  .portfolio h2 {
-    margin-bottom: 10px;
-    font-size: 28px;
-    color: #ffcc70;
-  }
-  
-  .portfolio p {
-    font-size: 16px;
-    line-height: 1.6;
-    color: #dddddd;
-  }
-  
-/* Add this fade-out animation */
-.fade-out {
-    animation: fadeAway 1.4s ease-in-out forwards;
-  }
-  
-  @keyframes fadeAway { /* keyframes are just like animation tag?? - dont really know how to explain this */
-    0% { opacity: 1; transform: scale(1); } /* Start fully visible and normal size */
-    50% { opacity: 0.5; transform: scale(1.05); } /* Midway: slightly bigger and fading */
-    100% { opacity: 0; transform: scale(0.98); } /* End: invisible and slightly smaller */
-  }
-  
-  body.main-mode { /*after transitions to just return to normal mode*/
-    background: #f5f5f5;
-    color: #222;
-    transition: background 1.2s ease, color 1.2s ease;
-  }
-  
-/* Profile section layout */
+  margin: 0;
+  padding: 0;
+  background: #121212;
+  font-family: 'Segoe UI', sans-serif;
+  color: white;
+}
+
+/* Center everything vertically */
+.main-stage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+}
+
+/* Hide radio toggles - got this from w3 school website linked in the html page. */
+.step-toggle {
+  display: none;
+}
+
+/* Buttons area */
+.button-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* Shared button style */
+.magic-btn {
+  position: absolute;
+  padding: 12px 24px;
+  background: #ffd981;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 16px;
+  transition: all 0.4s ease;
+  box-shadow: 0 5px 15px rgba(252, 254, 165, 0.866);
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.9);
+}
+/* same buttons but now on hover*/
+.magic-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 25px rgba(255, 238, 139, 0.82);
+}
+
+/* Button positions, just random */
+#btn1 {
+  top: 20%;
+  left: 30%;
+  opacity: 1;
+  pointer-events: auto;
+  transform: none;
+}
+#btn2 {
+  top: 60%;
+  right: 80%;
+}
+#btn3 {
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%) scale(0.9);
+}
+/*Once a step is clicked, we're telling the page:
+Show the next button (with opacity and pointer access)
+Hide the current (or previous) button by fading and disabling it*/
+
+/* Reveal next step buttons */
+#step1:checked ~ .button-container #btn2,
+#step2:checked ~ .button-container #btn3 {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
+}
+
+/* Hide previous step buttons */
+#step1:checked ~ .button-container #btn1,
+#step2:checked ~ .button-container #btn1,
+#step3:checked ~ .button-container #btn1,
+#step2:checked ~ .button-container #btn2,
+#step3:checked ~ .button-container #btn2 {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.9);
+}
+
+/* Portfolio panel (hidden by default) */
+#portfolio {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 600px;
+  background: #1f1f1f;
+  padding: 20px;
+  margin: 30px auto 10px;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+  animation: fadeIn 1s ease forwards;
+}
+
+/* Show portfolio when final step is clicked , i did this because i was having problems. Originally it worked but then  I realized no JS*/
+#step3:checked ~ #portfolio {
+  display: flex;
+}
+
+/* Bio section layout */
 .profile-header {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-  }
-  
-  .profile-img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid #ffcc70;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-  }
-  
-  /* Introductory text spacing */
-  .intro-text h2 {
-    font-size: 28px;
-    margin-bottom: 8px;
-    color: #ffcc70;
-  }
-  
-  .intro-text p {
-    color: #dddddd;
-    font-size: 16px;
-    line-height: 1.5;
-  }
-  
-  /* Fun facts styling */
-  .fun-header {
-    margin-top: 20px;
-    font-size: 22px;
-    color: #ffb347;
-  }
-  
-  .fun-facts {
-    list-style: none;
-    padding: 0;
-    margin-top: 10px;
-  }
-  
-  .fun-facts li {
-    margin-bottom: 10px;
-    font-size: 16px;
-    background: #d4d1d1;
-    padding: 10px 16px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(255, 204, 112, 0.2);
-    transition: transform 0.3s ease;
-  }
-  
-  .fun-facts li:hover {
-    /* move five pixels to the right */
-    transform: translateX(5px);
-    background: #3a3a3a;
-  }
-  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+/* editing my cute little bunny picture */
+.profile-img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #ffcc70;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Text styling */
+.intro-text h2 {
+  color: #ffcc70;
+  font-size: 26px;
+  margin-bottom: 8px;
+}
+.intro-text p {
+  color: #dddddd;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.fun-header {
+  margin-top: 20px;
+  font-size: 22px;
+  color: #ffb347;
+}
+.fun-facts {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+}
+.fun-facts li {
+  background: #d4d1d1;
+  color: #121212;
+  padding: 10px 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(255, 204, 112, 0.2);
+  margin-bottom: 10px;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+/* on hover - it will move 5 pixels to the right */
+.fun-facts li:hover {
+  transform: translateX(5px);
+  background: #3a3a3a;
+  color: #fff;
+}
+
+/* Fade-in animation, using keyframes is helping us do that*/
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+#watermark {
+  text-align: center;
+}
+
+#ppp {
+  text-align: center;
+}
+/*fron the google website */
+.sevillana-regular {
+  font-family: "Sevillana", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+#h22 {
+  text-align: center;
+  font-family: sevillana;
+}
+
+
