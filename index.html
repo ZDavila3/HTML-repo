@@ -1,34 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Document new</title>
+  <meta charset="UTF-8">
+  <title>All about Z</title>
+  <!-- linking my css file to the html file -->
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    
-<h1>Hi
-    <h2 class="style-text">Hi
-        <h3>Hi
-            <h4 id="new-style-text">hi
-                <h4>hi
-                    <h5>hi
-                        <h6 class="paragraph">franklin apple pies are the best
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br> Omnis, placeat eaque. <span style="color: pink">Quibusdam autem in veniam libero atque ut dicta similique facilis,</span> sapiente, provident quo quis mollitia? Quidem cumque nulla quibusdam.</p>
-                        </h6>
-                    </h5>
-                </h4>
-            </h4>
-        </h3>
-    </h2>
-</h1>
-
-<p>this is a <a href=#>line.</a></p>
-
-<img src="https://media.newyorker.com/photos/59096937019dfc3494ea1169/master/pass/Frazier-Bunny-Rabbits.jpg" width="100px" alt="Bunny" class="bunny">
+    <!-- creating a buttonS section w/ buttons (3 to be exact) -->
+  <div class="button-container">
+    <button id="btn1" class="magic-btn">Catch Me 1</button>
+    <button id="btn2" class="magic-btn hidden">Catch Me 2</button>
+    <button id="btn3" class="magic-btn hidden">Catch Me 3</button>
+  </div>
+  <!-- creating a portfolio section -->
+  <div id="portfolio" class="portfolio hidden">
+    <div class="profile-header">
+      <!-- Profile image (I was gonna do my self but nahhhhhhh bunny is better <3) -->
+      <img src="IMG_6489.jpeg" alt="Photo of bunny" class="profile-img">
+      <div class="intro-text">
+        <h2>Hi, I'm Zanett 🐰</h2>
+        <p>I currently attend Temple University studying Data Science with a concentration in Computational Analytics.</p>
+      </div>
+    </div>
+  
+    <h3 class="fun-header">Here are some fun facts about me:</h3>
+    <ul class="fun-facts">
+      <li>🎂 I love baking! (especially strawberry cakes)</li>
+      <li>🌿 I love being outside – probably more than I should.</li>
+      <li>🐇 I have a pet bunny who thinks they're in charge.</li>
+      <li>💪 Gym time is sacred—even if it’s just a 10% effort day.</li>
+    </ul>
+  </div>
+  <!-- creating a script section (this is JS) -->
+   <!-- this is js logic, i just had an idea that i really wanted to try out.-->
+   <script>
+    const btn1 = document.getElementById("btn1");
+    const btn2 = document.getElementById("btn2");
+    const btn3 = document.getElementById("btn3");
+    const portfolio = document.getElementById("portfolio");
+    const container = document.querySelector(".button-container");
+  
+    btn1.addEventListener("mouseenter", () => {
+      btn2.classList.remove("hidden");
+    });
+  /* logic explanation= once the mouse is hovering over the button (an action) it will then remove the next hidden button. */
+    btn2.addEventListener("mouseenter", () => {
+      btn3.classList.remove("hidden");
+    });
+  
+    btn3.addEventListener("mouseenter", () => {
+      container.classList.add("fade-out");
+  
+      setTimeout(() => {
+        container.style.display = "none";
+        document.body.classList.add("main-mode");
+        portfolio.classList.remove("hidden"); // Portfolio shows after transition ends
+      }, 1400); //seconds - if im not mistaken
+    });
+  </script>
 </body>
-<footer>
-
-</footer>
 </html>
